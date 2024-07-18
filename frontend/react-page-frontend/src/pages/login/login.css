@@ -3,28 +3,40 @@
     azul escuro: #1B2153
     branco: #fff
 */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 .container{
-    width: 200px;
-    height: max-content;
-    margin: auto;
-    background-color: #8b42ca;
-    padding: 20px 15px;
-    margin-top: 120px;
-    border-radius: 7px;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/images/background-login.png');
+    background-position: center;
+    background-size: cover;
     font-family: "Hammersmith One", sans-serif;
-    box-shadow: 10px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.contents{
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
 }
 
 h1{
-    margin: 0;
-    text-align: left;
     margin-bottom: 10px;
+    color: #fff;
+    
 }
 
 .login-form{
     padding: 5px;
-
 }
 
 .form-field{
@@ -45,4 +57,5 @@ h1{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 5px 10px;
+    color: blue;
 }

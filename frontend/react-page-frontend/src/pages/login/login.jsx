@@ -27,48 +27,53 @@ export function Login() {
 
     return (
         <div className='container'>
-            <h1>Login</h1>
+            <div className='contents'>
+                <h1>Login</h1>
 
-            <Formik
-                initialValues={{}}
-                onSubmit={handleClickLogin}
-                validationSchema={validationLogin}
-            >
-                <Form className="login-form">
-                    {/* email ============================================================== */}
-                    <div className="login-form-group">
-                        <Field name="email" 
-                            className="form-field" 
-                            placeholder="Email"
-                        />
-                        <ErrorMessage 
-                            component="span"
-                            name="email"
-                            className="form-error"
-                        />
-                    </div>
+                <Formik
+                    initialValues={{}}
+                    onSubmit={handleClickLogin}
+                    validationSchema={validationLogin}
+                >
+                    <Form className="login-form">
+                        {/* email   =======================================================   ======= */}
+                        <div className="login-form-group">
+                            <Field name="email" 
+                                className="form-field" 
+                                placeholder="Email"
+                            />
+                            <ErrorMessage 
+                                component="span"
+                                name="email"
+                                className="form-error"
+                            />
+                        </div>
 
-                    {/* password ============================================================== */}
-                    <div className="login-form-group">
-                        <Field name="password" 
-                            className="form-field" 
-                            placeholder="Senha"
-                        />
-                        <ErrorMessage 
-                            component="span"
-                            name="password"
-                            className="form-error"
-                        />
-                        <Link to="/registrar">
-                            Não tem conta? Cadastre-se
-                        </Link>
-                    </div>
+                        {/* password    =======================================================    ======= */}
+                        <div className="login-form-group">
+                            <Field name="password" 
+                                className="form-field" 
+                                placeholder="Senha"
+                            />
+                            <ErrorMessage 
+                                component="span"
+                                name="password"
+                                className="form-error"
+                            />
+                            <br />
+                            <Link to="/registrar">
+                                Não tem conta? Cadastre-se
+                            </Link>
+                        </div>
 
-                    <button className="button" type="submit">
-                        Login
-                    </button>
-                </Form>
-            </Formik>
+                        <button className="button" type="submit">
+                            Login
+                        </button>
+                    </Form>
+                </Formik>
+            </div>
+
+            
         </div>
     );
 }
