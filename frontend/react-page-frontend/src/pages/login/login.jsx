@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import './login.css';
 import Axios from 'axios';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos'
+
+// https://cssgradient.io/
+// https://excalidraw.com/
 
 export function Login() {
     const handleClickLogin = (values) => {
@@ -25,19 +31,30 @@ export function Login() {
             .required("Este campo é obrigatório"),
     });
 
+    useEffect(() =>{
+        AOS.init({
+            offset: 0,
+            duration: 800,
+            once: true,
+        });
+    }, [])
+
     return (
-        <div className='container'>
+        <div className='container' >
+
             <div className='contents'>
-                <h1>Login</h1>
+                <div className='box-tittle'>
+                    <h1>Login</h1>
+                </div>
+                
 
                 <Formik
                     initialValues={{}}
                     onSubmit={handleClickLogin}
                     validationSchema={validationLogin}
                 >
-                    <Form className="login-form">
+                    <Form>
                         {/* email   =======================================================   ======= */}
-                        <div className="login-form-group">
                             <Field name="email" 
                                 className="form-field" 
                                 placeholder="Email"
@@ -47,26 +64,28 @@ export function Login() {
                                 name="email"
                                 className="form-error"
                             />
-                        </div>
+                        
 
                         {/* password    =======================================================    ======= */}
-                        <div className="login-form-group">
+                       
                             <Field name="password" 
                                 className="form-field" 
                                 placeholder="Senha"
+                                type="password"
                             />
                             <ErrorMessage 
                                 component="span"
                                 name="password"
                                 className="form-error"
                             />
-                            <br />
-                            <Link to="/registrar">
+                            
+                            
+                            <Link className='link' to="/registrar">
                                 Não tem conta? Cadastre-se
                             </Link>
-                        </div>
+                      
 
-                        <button className="button" type="submit">
+                        <button data-aos="fade-up" data-aos-anchor-placement="center-center" type="submit">
                             Login
                         </button>
                     </Form>

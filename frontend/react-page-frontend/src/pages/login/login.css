@@ -10,40 +10,57 @@
 }
 
 .container{
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-image: url('../../assets/images/background-login.png');
     background-position: center;
     background-size: cover;
     font-family: "Hammersmith One", sans-serif;
+
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    position: relative;
     
 }
 
 .contents{
-    backdrop-filter: blur(5px);
-    display: flex;
+    height: calc(max-content + 10%);
+    width: 25%;
+    backdrop-filter: blur(30px);
+    padding: 2%;
+    
+    border-radius: 30px;
     justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-h1{
-    margin-bottom: 10px;
-    color: #fff;
+Form{
+    height: 170px;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
     
 }
 
-.login-form{
-    padding: 5px;
+h1{
+    color: #fff;
+    height: max-content;
+    
 }
 
 .form-field{
-    display: inline-block;
-    padding: 5px;
+    /* display: inline-block;
+    padding: 5px; */
+    
     margin-top: 20px;
-
+    width: 200px;
 }
 
 .form-error{
@@ -51,11 +68,30 @@ h1{
     color: rgb(237, 67, 55);
     font-size: 0.9em;
     font-weight: 600;
+    border: solid 2px rgb(30, 0, 255);
 }
 
-.button{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 5px 10px;
-    color: blue;
+.link{
+    display: flex;
+    color: #fff;
 }
+
+button{
+    height: 35px;
+    width: 200px;
+    cursor: pointer;
+    background: rgb(146,71,196);
+    background: linear-gradient(90deg, rgba(146,71,196,1) 25%, rgba(0,212,255,1) 88%);
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+   
+}
+
+button:hover{
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 25%, rgba(146,71,196,1) 88%);
+    transition: 5s;
+    
+}
+
