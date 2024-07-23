@@ -1,22 +1,23 @@
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import './login.css';
 import Axios from 'axios';
-import { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos'
-
-// https://cssgradient.io/
-// https://excalidraw.com/
 
 export function Login() {
+    const navigate = useNavigate();
+    const [message, setMessage] = useState('');
+
     const handleClickLogin = (values) => {
         Axios.post("http://localhost:3001/login", {
             email: values.email,
             password: values.password
         }).then((response) => {
-            console.log(response);
+            setMessage(response.data.msg);
+            if (response.data.msg === "Login efetuado com sucesso") {
+                navigate("/"); 
+            }
         });
     }
 
@@ -31,22 +32,14 @@ export function Login() {
             .required("Este campo é obrigatório"),
     });
 
-    useEffect(() =>{
-        AOS.init({
-            offset: 0,
-            duration: 800,
-            once: true,
-        });
-    }, [])
-
     return (
-        <div className='container' >
-
+        <div className='container'>
             <div className='contents'>
                 <div className='box-tittle'>
                     <h1>Login</h1>
                 </div>
-                
+
+                {message && <p className="message">{message}</p>}
 
                 <Formik
                     initialValues={{}}
@@ -54,45 +47,18 @@ export function Login() {
                     validationSchema={validationLogin}
                 >
                     <Form>
-                        {/* email   =======================================================   ======= */}
-                            <Field name="email" 
-                                className="form-field" 
-                                placeholder="Email"
-                            />
-                            <ErrorMessage 
-                                component="span"
-                                name="email"
-                                className="form-error"
-                            />
+                        <Field name="email" className="form-field" placeholder="Email" />
+                        <ErrorMessage component="span" name="email" className="form-error" />
                         
-
-                        {/* password    =======================================================    ======= */}
-                       
-                            <Field name="password" 
-                                className="form-field" 
-                                placeholder="Senha"
-                                type="password"
-                            />
-                            <ErrorMessage 
-                                component="span"
-                                name="password"
-                                className="form-error"
-                            />
-                            
-                            
-                            <Link className='link' to="/registrar">
-                                Não tem conta? Cadastre-se
-                            </Link>
-                      
-
-                        <button data-aos="fade-up" data-aos-anchor-placement="center-center" type="submit">
-                            Login
-                        </button>
+                        <Field name="password" className="form-field" placeholder="Senha" type="password" />
+                        <ErrorMessage component="span" name="password" className="form-error" />
+                        
+                        <Link className='link' to="/registrar">Não tem conta? Cadastre-se</Link>
+                        
+                        <button type="submit">Login</button>
                     </Form>
                 </Formik>
             </div>
-
-            
         </div>
     );
 }

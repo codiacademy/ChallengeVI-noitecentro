@@ -56,19 +56,28 @@ h1{
 }
 
 .form-field{
-    /* display: inline-block;
-    padding: 5px; */
-    
+
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 2px #fff;
+    color: #fff;
     margin-top: 20px;
     width: 200px;
 }
+
+.form-field::placeholder{
+    color: #fff;
+}
+
 
 .form-error{
     display: block;
     color: rgb(237, 67, 55);
     font-size: 0.9em;
     font-weight: 600;
-    border: solid 2px rgb(30, 0, 255);
+
 }
 
 .link{
@@ -76,22 +85,24 @@ h1{
     color: #fff;
 }
 
-button{
+button {
     height: 35px;
     width: 200px;
     cursor: pointer;
-    background: rgb(146,71,196);
     background: linear-gradient(90deg, rgba(146,71,196,1) 25%, rgba(0,212,255,1) 88%);
     border: none;
     color: #fff;
     border-radius: 5px;
-   
+    background-size: 200% 100%;
+    background-position: left;
+    transition: background-position 1s ease;
 }
 
-button:hover{
-    background: rgb(0,212,255);
-    background: linear-gradient(90deg, rgba(0,212,255,1) 25%, rgba(146,71,196,1) 88%);
-    transition: 5s;
-    
+button:hover {
+    background-position: right;
 }
 
+.message {
+    color: red;
+    margin-top: 10px;
+}

@@ -42,24 +42,23 @@ app.post("/login", (req, res)=> {
     const email = req.body.email;
     const password = req.body.password;
 
-    db.query("SELECT * FROM usuarios WHERE email = ?", [email, password], (err, result) => {
+    db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
         if(err){
             res.send(err);
         }
         if(result.length > 0){
-            bcrypt.compare(password, result[0].password, (err, result) => {
-                if(result){
+            bcrypt.compare(password, result[0].password, (err, isMatch) => {
+                if(isMatch){
                     res.send({msg: "Login efetuado com sucesso"});
                 }else{
                     res.send({msg: "Senha inválida"});
                 }
-            })
-            res.send({msg: "Login efetuado com sucesso"});
+            });
         } else {
-            res.send({msg: "Email não encontrado"})
+            res.send({msg: "Email não encontrado"});
         }
-    })
-})
+    });
+});
 
 app.listen(3001, () => {
     console.log("Servidor rodando em http://localhost:3001");
