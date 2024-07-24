@@ -7,6 +7,8 @@ import { Servicos } from "../pages/servicos/servicos.jsx";
 import { Contato } from "../pages/contato/contato.jsx";
 import { Login } from "../pages/login/login.jsx";
 import { Registrar } from "../pages/login/registrar.jsx";
+import { ContatoCrud } from "../crud/contato-crud.jsx";
+import { LoginCrud } from "../crud/login-crud.jsx";
 
 export function Router() {
   return (
@@ -18,6 +20,8 @@ export function Router() {
       <Route path="/contato" element={<Contato />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registrar" element={<Registrar />} />
+      <Route path="/contato-crud" element={<ContatoCrud />} />
+      <Route path="/login-crud" element={<LoginCrud />} />
     </Routes>
   );
 }

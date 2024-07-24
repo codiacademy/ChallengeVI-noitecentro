@@ -60,6 +60,37 @@ app.post("/login", (req, res)=> {
     });
 });
 
+
+
+// Tabela de contatos ==============================================================================
+
+app.post("/contact", (req, res) => {
+   const { nome } = req.body;
+   const { email } = req.body;
+   const { fone } = req.body;
+   const { duvida } = req.body;
+
+   let SQL = "INSERT INTO contact (nome, email, fone, duvida) VALUES (?, ?, ?, ?)";
+
+   db.query(SQL, [nome, email, fone, duvida], (err, result) =>{
+        console.log(err);
+   })
+});
+
+app.get("/contact", (req, res) => {
+    let SQL = "SELECT * FROM contact";
+
+    db.query(SQL, (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    })
+});
+
+
 app.listen(3001, () => {
     console.log("Servidor rodando em http://localhost:3001");
 });
+

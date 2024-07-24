@@ -28,6 +28,14 @@ export function Header() {
             <Link to="/login">
                 login
             </Link>
+
+            <Link to="/contato-crud">
+                crud contato
+            </Link>
+
+            <Link to="/login-crud">
+                crud login
+            </Link>
         </div>
     );
 }
