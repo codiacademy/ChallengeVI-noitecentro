@@ -24,12 +24,12 @@ export function Login() {
     const validationLogin = yup.object().shape({
         email: yup
             .string()
-            .email("Email inválido")
-            .required("Este campo é obrigatório"),
+            .email('Email inválido')
+            .required('Este campo é obrigatório'),
         password: yup
             .string()
-            .min(8, "A senha deve ter no mínimo 8 caracteres")
-            .required("Este campo é obrigatório"),
+            .min(8, 'A senha deve ter no mínimo 8 caracteres')
+            .required('Este campo é obrigatório')
     });
 
     return (
@@ -42,20 +42,25 @@ export function Login() {
                 {message && <p className="message">{message}</p>}
 
                 <Formik
-                    initialValues={{}}
+                    initialValues={{ email: '', password: '' }}
                     onSubmit={handleClickLogin}
                     validationSchema={validationLogin}
                 >
-                    <Form>
-                        <Field name="email" className="form-field" placeholder="Email" />
-                        <ErrorMessage component="span" name="email" className="form-error" />
-                        
-                        <Field name="password" className="form-field" placeholder="Senha" type="password" />
-                        <ErrorMessage component="span" name="password" className="form-error" />
-                        
+                    <Form className="login-form">
+                        <div className="login-form-group">
+                            <Field name="email" className="form-field" placeholder="Email" />
+                            <ErrorMessage component="span" name="email" className="form-error" />
+                        </div>
+                        <div className="login-form-group">
+                            <Field name="password" className="form-field" placeholder="Senha" type="password" />
+                            <ErrorMessage component="span" name="password" className="form-error" />
+                        </div>
+
                         <Link className='link' to="/registrar">Não tem conta? Cadastre-se</Link>
-                        
-                        <button type="submit">Login</button>
+
+                        <button className="login-button" type="submit">
+                            Login
+                        </button>
                     </Form>
                 </Formik>
             </div>

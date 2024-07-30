@@ -85,7 +85,7 @@ h1{
     color: #fff;
 }
 
-button {
+.login-button {
     height: 35px;
     width: 200px;
     cursor: pointer;
@@ -98,7 +98,7 @@ button {
     transition: background-position 1s ease;
 }
 
-button:hover {
+.login-button:hover {
     background-position: right;
 }
 

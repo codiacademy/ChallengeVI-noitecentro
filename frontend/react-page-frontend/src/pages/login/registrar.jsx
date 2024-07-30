@@ -46,7 +46,7 @@ export function Registrar() {
                 {message && <p className="message">{message}</p>}
 
                 <Formik
-                    initialValues={{}}
+                    initialValues={{ email: "", password: "", confirmPassword: "" }}
                     onSubmit={handleClickRegister}
                     validationSchema={validationRegister}
                 >
@@ -63,7 +63,7 @@ export function Registrar() {
                             <Field name="confirmPassword" className="form-field" placeholder="Confirme sua senha" type="password" />
                             <ErrorMessage component="span" name="confirmPassword" className="form-error" />
                         </div>
-                        <button className="button" type="submit">
+                        <button className="login-button" type="submit">
                             Registrar-se
                         </button>
                     </Form>

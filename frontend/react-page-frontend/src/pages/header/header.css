@@ -2,3 +2,14 @@
     display: flex;
     gap: 20px;
 }
+
+.logout--button{
+    background-color: transparent;
+    border: none;
+}
+
+.logout{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
