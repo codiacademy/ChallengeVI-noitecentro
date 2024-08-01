@@ -10,12 +10,13 @@ export function Registrar() {
     const [message, setMessage] = useState('');
 
     const handleClickRegister = (values) => {
-        Axios.post("http://localhost:3001/register", {
+        Axios.post("http://localhost:3001/register", { 
             email: values.email,
             password: values.password,
-        }).then((response) => {
-            setMessage(response.data.msg);
-            if (response.data.msg === "Cadastrado com sucesso!") {
+
+        }).then((res) => {
+            setMessage(res.data.msg);
+            if (res.data.msg === "Cadastrado com sucesso!") {
                 navigate("/login");
             }
         });
@@ -56,11 +57,11 @@ export function Registrar() {
                             <ErrorMessage component="span" name="email" className="form-error" />
                         </div>
                         <div className="login-form-group">
-                            <Field name="password" className="form-field" placeholder="Senha" type="password" />
+                            <Field name="password" className="form-field" placeholder="Senha" type="text" />
                             <ErrorMessage component="span" name="password" className="form-error" />
                         </div>
                         <div className="login-form-group">
-                            <Field name="confirmPassword" className="form-field" placeholder="Confirme sua senha" type="password" />
+                            <Field name="confirmPassword" className="form-field" placeholder="Confirme sua senha" type="text" />
                             <ErrorMessage component="span" name="confirmPassword" className="form-error" />
                         </div>
                         <button className="login-button" type="submit">

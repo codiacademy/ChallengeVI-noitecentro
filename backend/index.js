@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql2");
+const mysql = require("mysql");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -17,9 +17,10 @@ app.use(cors({
     origin: "http://localhost:5173"
 }));
 
+// login e registro de usuários ====================================================================================
 app.post("/register", (req, res) => {
     const { email, password } = req.body;
-
+    
     db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
         if (err) {
             return res.status(500).send({ msg: "Erro no servidor" });
@@ -29,7 +30,7 @@ app.post("/register", (req, res) => {
                 if (err) {
                     return res.status(500).send({ msg: "Erro ao criptografar a senha" });
                 }
-                db.query("INSERT INTO usuarios (email, password) VALUES (?, ?)", [email, hash], (err, response) => {
+                db.query("INSERT INTO usuarios (email, password) VALUES (?, ?)", [email, hash], (err, result) => {
                     if (err) {
                         return res.status(500).send({ msg: "Erro ao cadastrar usuário" });
                     }
@@ -37,53 +38,69 @@ app.post("/register", (req, res) => {
                 });
             });
         } else {
-            res.send({ msg: "Email já existe" });
+            res.status(400).send({ msg: "Email já existe" });
         }
     });
 });
 
 app.post("/login", (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-
+    const { email, password } = req.body;
+    
     db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
         if (err) {
-            res.send(err);
+            return res.status(500).send(err);
         }
         if (result.length > 0) {
-            bcrypt.compare(password, result[0].password, (err, isMatch) => {
-                if (isMatch) {
+            bcrypt.compare(password, result[0].password, (err, match) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                if (match) {
                     res.send({ msg: "Login efetuado com sucesso" });
                 } else {
-                    res.send({ msg: "Senha inválida" });
+                    res.status(400).send({ msg: "Senha inválida" });
                 }
             });
         } else {
-            res.send({ msg: "Email não encontrado" });
+            res.status(404).send({ msg: "Email não encontrado" });
         }
     });
 });
 
-// Tabela de contatos ==============================================================================
-app.post("/contact", (req, res) => {
-    const { nome, email, fone, duvida } = req.body;
 
-    let SQL = "INSERT INTO contact (nome, email, fone, duvida) VALUES (?, ?, ?, ?)";
+// parte de contato ================================================================================================
+app.post("/contactItems", (req, res) => {
+    const { nome, email, fone, duvida } = req.body;
+    const SQL = "INSERT INTO contact (nome, email, fone, duvida) VALUES (?, ?, ?, ?)";
 
     db.query(SQL, [nome, email, fone, duvida], (err, result) => {
         if (err) {
-            return res.send(err);
+            return res.status(500).send(err);
+        }
+        res.send({ msg: "Contato cadastrado com sucesso!" });
+    });
+});
+
+
+// CRUD de contatos ================================================================================================
+app.post("/contact", (req, res) => {
+    const { nome, email, fone, duvida } = req.body;
+    const SQL = "INSERT INTO contact (nome, email, fone, duvida) VALUES (?, ?, ?, ?)";
+    
+    db.query(SQL, [nome, email, fone, duvida], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
         }
         res.send({ msg: "Contato cadastrado com sucesso!" });
     });
 });
 
 app.get("/contact", (req, res) => {
-    let SQL = "SELECT * FROM contact";
-
+    const SQL = "SELECT * FROM contact";
+    
     db.query(SQL, (err, result) => {
         if (err) {
-            return res.send(err);
+            return res.status(500).send(err);
         }
         res.send(result);
     });
@@ -91,12 +108,11 @@ app.get("/contact", (req, res) => {
 
 app.put("/contact", (req, res) => {
     const { id, nome, email, fone, duvida } = req.body;
-
-    let SQL = "UPDATE contact SET nome = ?, email = ?, fone = ?, duvida = ? WHERE id = ?";
-
+    const SQL = "UPDATE contact SET nome = ?, email = ?, fone = ?, duvida = ? WHERE id = ?";
+    
     db.query(SQL, [nome, email, fone, duvida, id], (err, result) => {
         if (err) {
-            return res.send(err);
+            return res.status(500).send(err);
         }
         res.send({ msg: "Contato atualizado com sucesso!" });
     });
@@ -104,28 +120,29 @@ app.put("/contact", (req, res) => {
 
 app.delete("/contact/:id", (req, res) => {
     const { id } = req.params;
-    let SQL = "DELETE FROM contact WHERE id = ?";
-
+    const SQL = "DELETE FROM contact WHERE id = ?";
+    
     db.query(SQL, [id], (err, result) => {
         if (err) {
-            return res.send(err);
+            return res.status(500).send(err);
         }
         res.send({ msg: "Contato excluído com sucesso!" });
     });
-})
+});
 
-// Tabela de Login ======================================================================================================
+
+// CRUD de usuários ================================================================================================
+
 app.post("/users", (req, res) => {
     const { email, password, staff } = req.body;
-
+    
     bcrypt.hash(password, saltRounds, (err, hash) => {
         if (err) {
             return res.status(500).send(err);
         }
-
-        let SQL = "INSERT INTO usuarios (email, password, staff) VALUES (?, ?, ?)";
+        const SQL = "INSERT INTO usuarios (email, password, staff) VALUES (?, ?, ?)";
+        
         db.query(SQL, [email, hash, staff || 0], (err, result) => {
-
             if (err) {
                 return res.status(500).send(err);
             }
@@ -135,8 +152,8 @@ app.post("/users", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-    let SQL = "SELECT * FROM usuarios";
-
+    const SQL = "SELECT * FROM usuarios";
+    
     db.query(SQL, (err, result) => {
         if (err) {
             return res.status(500).send(err);
@@ -147,13 +164,14 @@ app.get("/users", (req, res) => {
 
 app.put("/users", (req, res) => {
     const { id, email, password, staff } = req.body;
-
+    
     if (password) {
         bcrypt.hash(password, saltRounds, (err, hash) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            let SQL = "UPDATE usuarios SET email = ?, password = ?, staff = ? WHERE id = ?";
+            const SQL = "UPDATE usuarios SET email = ?, password = ?, staff = ? WHERE id = ?";
+            
             db.query(SQL, [email, hash, staff, id], (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
@@ -162,7 +180,8 @@ app.put("/users", (req, res) => {
             });
         });
     } else {
-        let SQL = "UPDATE usuarios SET email = ?, staff = ? WHERE id = ?";
+        const SQL = "UPDATE usuarios SET email = ?, staff = ? WHERE id = ?";
+        
         db.query(SQL, [email, staff, id], (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -170,13 +189,12 @@ app.put("/users", (req, res) => {
             res.send({ msg: "Usuario atualizado com sucesso!" });
         });
     }
-
 });
 
 app.delete("/users/:id", (req, res) => {
     const { id } = req.params;
-    let SQL = "DELETE FROM usuarios WHERE id = ?";
-
+    const SQL = "DELETE FROM usuarios WHERE id = ?";
+    
     db.query(SQL, [id], (err, result) => {
         if (err) {
             return res.status(500).send(err);
@@ -184,6 +202,9 @@ app.delete("/users/:id", (req, res) => {
         res.send({ msg: "Usuario excluído com sucesso!" });
     });
 });
+
+
+// configurando a porta do servidor ====================================================================================
 
 app.listen(3001, () => {
     console.log("Servidor rodando em http://localhost:3001");
