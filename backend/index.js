@@ -20,28 +20,37 @@ app.use(cors({
 // login e registro de usuários ====================================================================================
 app.post("/register", (req, res) => {
     const { email, password } = req.body;
+    const defaultStaffValue = 0; 
     
+    console.log("Recebido:", { email, password });
+
     db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
         if (err) {
+            console.error("Erro ao verificar email:", err);
             return res.status(500).send({ msg: "Erro no servidor" });
         }
         if (result.length === 0) {
             bcrypt.hash(password, saltRounds, (err, hash) => {
                 if (err) {
+                    console.error("Erro ao criptografar a senha:", err);
                     return res.status(500).send({ msg: "Erro ao criptografar a senha" });
                 }
-                db.query("INSERT INTO usuarios (email, password) VALUES (?, ?)", [email, hash], (err, result) => {
+                db.query("INSERT INTO usuarios (email, password, staff) VALUES (?, ?, ?)", [email, hash, defaultStaffValue], (err, result) => {
                     if (err) {
+                        console.error("Erro ao cadastrar usuário:", err);
                         return res.status(500).send({ msg: "Erro ao cadastrar usuário" });
                     }
+                    console.log("Usuário cadastrado com sucesso:", result);
                     res.send({ msg: "Cadastrado com sucesso!" });
                 });
             });
         } else {
+            console.log("Email já existe:", email);
             res.status(400).send({ msg: "Email já existe" });
         }
     });
 });
+
 
 app.post("/login", (req, res) => {
     const { email, password } = req.body;

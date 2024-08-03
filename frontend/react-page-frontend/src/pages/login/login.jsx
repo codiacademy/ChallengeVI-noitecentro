@@ -1,25 +1,14 @@
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import * as yup from 'yup';
+import 'react-toastify/dist/ReactToastify.css';
 import './login.css';
 import Axios from 'axios';
 
 export function Login() {
     const navigate = useNavigate();
-    const [message, setMessage] = useState('');
-
-    const handleClickLogin = (values) => {
-        Axios.post("http://localhost:3001/login", {
-            email: values.email,
-            password: values.password
-        }).then((response) => {
-            setMessage(response.data.msg);
-            if (response.data.msg === "Login efetuado com sucesso") {
-                navigate("/"); 
-            }
-        });
-    }
 
     const validationLogin = yup.object().shape({
         email: yup
@@ -32,14 +21,34 @@ export function Login() {
             .required('Este campo é obrigatório')
     });
 
+    const handleClickLogin = (values, { resetForm }) => {
+        Axios.post("http://localhost:3001/login", {
+            email: values.email,
+            password: values.password
+        }).then((res) => {
+            if (res.data.msg === "Login efetuado com sucesso") {
+                navigate("/");
+                resetForm();
+            }
+        }).catch((err) => {
+            toast.error("Erro ao entrar na conta", {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+            });
+        });
+    };
+
     return (
         <div className='container'>
             <div className='contents'>
                 <div className='box-tittle'>
                     <h1>Login</h1>
                 </div>
-
-                {message && <p className="message">{message}</p>}
 
                 <Formik
                     initialValues={{ email: '', password: '' }}
@@ -64,6 +73,8 @@ export function Login() {
                     </Form>
                 </Formik>
             </div>
+
+            <ToastContainer />
         </div>
     );
 }
