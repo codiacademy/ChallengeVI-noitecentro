@@ -1,25 +1,14 @@
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import * as yup from 'yup';
 import './login.css';
 import Axios from 'axios';
 
 export function Registrar() {
     const navigate = useNavigate();
-    const [message, setMessage] = useState('');
-
-    const handleClickRegister = (values) => {
-        Axios.post("http://localhost:3001/register", {
-            email: values.email,
-            password: values.password,
-        }).then((response) => {
-            setMessage(response.data.msg);
-            if (response.data.msg === "Cadastrado com sucesso!") {
-                navigate("/login");
-            }
-        });
-    };
 
     const validationRegister = yup.object().shape({
         email: yup
@@ -36,6 +25,28 @@ export function Registrar() {
             .required("Este campo é obrigatório"),
     });
 
+    const handleClickRegister = (values, { resetForm }) => {
+        Axios.post("http://localhost:3001/register", { 
+            email: values.email,
+            password: values.password,
+        }).then((res) => {
+            if (res.data.msg === "Cadastrado com sucesso!") {
+                navigate("/login");
+                resetForm();
+            }
+        }).catch((err) => {
+            toast.error("Erro ao concluir registro!", {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+            });
+        });
+    };
+
     return (
         <div className='container'>
             <div className='contents'>
@@ -43,16 +54,14 @@ export function Registrar() {
                     <h1>Registrar-se</h1>
                 </div>
 
-                {message && <p className="message">{message}</p>}
-
                 <Formik
-                    initialValues={{}}
+                    initialValues={{ email: "", password: "", confirmPassword: "" }}
                     onSubmit={handleClickRegister}
                     validationSchema={validationRegister}
                 >
                     <Form className="login-form">
                         <div className="login-form-group">
-                            <Field name="email" className="form-field" placeholder="Email" />
+                            <Field name="email" className="form-field" placeholder="Email" type="email" />
                             <ErrorMessage component="span" name="email" className="form-error" />
                         </div>
                         <div className="login-form-group">
@@ -63,12 +72,14 @@ export function Registrar() {
                             <Field name="confirmPassword" className="form-field" placeholder="Confirme sua senha" type="password" />
                             <ErrorMessage component="span" name="confirmPassword" className="form-error" />
                         </div>
-                        <button className="button" type="submit">
+                        <button className="login-button" type="submit">
                             Registrar-se
                         </button>
                     </Form>
                 </Formik>
             </div>
+
+            <ToastContainer />
         </div>
     );
 }

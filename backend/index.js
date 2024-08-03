@@ -20,29 +20,57 @@ app.use(cors({
 // login e registro de usuários ====================================================================================
 app.post("/register", (req, res) => {
     const { email, password } = req.body;
+<<<<<<< HEAD
     
     db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
         if (err) {
+=======
+    const defaultStaffValue = 0; 
+    
+    console.log("Recebido:", { email, password });
+
+    db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
+        if (err) {
+            console.error("Erro ao verificar email:", err);
+>>>>>>> erro-no-registrar
             return res.status(500).send({ msg: "Erro no servidor" });
         }
         if (result.length === 0) {
             bcrypt.hash(password, saltRounds, (err, hash) => {
                 if (err) {
+<<<<<<< HEAD
                     return res.status(500).send({ msg: "Erro ao criptografar a senha" });
                 }
                 db.query("INSERT INTO usuarios (email, password) VALUES (?, ?)", [email, hash], (err, result) => {
                     if (err) {
+=======
+                    console.error("Erro ao criptografar a senha:", err);
+                    return res.status(500).send({ msg: "Erro ao criptografar a senha" });
+                }
+                db.query("INSERT INTO usuarios (email, password, staff) VALUES (?, ?, ?)", [email, hash, defaultStaffValue], (err, result) => {
+                    if (err) {
+                        console.error("Erro ao cadastrar usuário:", err);
+>>>>>>> erro-no-registrar
                         return res.status(500).send({ msg: "Erro ao cadastrar usuário" });
                     }
+                    console.log("Usuário cadastrado com sucesso:", result);
                     res.send({ msg: "Cadastrado com sucesso!" });
                 });
             });
         } else {
+<<<<<<< HEAD
+=======
+            console.log("Email já existe:", email);
+>>>>>>> erro-no-registrar
             res.status(400).send({ msg: "Email já existe" });
         }
     });
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> erro-no-registrar
 app.post("/login", (req, res) => {
     const { email, password } = req.body;
     
@@ -208,4 +236,8 @@ app.delete("/users/:id", (req, res) => {
 
 app.listen(3001, () => {
     console.log("Servidor rodando em http://localhost:3001");
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> erro-no-registrar
