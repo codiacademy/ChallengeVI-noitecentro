@@ -51,7 +51,7 @@ export function LoginCrud() {
                 <h1 className="register--title">Crud Login</h1>
 
                 <input autoComplete="off" value={values.email} className="register--input" type="text" name="email" placeholder="Email:" onChange={handleChangeValues} />
-                <input autoComplete="off" value={values.password} className="register--input" type="password" name="password" placeholder="Senha:" onChange={handleChangeValues} />
+                <input autoComplete="off" value={values.password} className="register--input" type="text" name="password" placeholder="Senha:" onChange={handleChangeValues} />
                 <select name="staff" id="staff" onChange={handleChangeValues} value={values.staff} className="register--input">
                     <option value="" disabled>Selecione o cargo</option>
                     <option value="0">Usuário comum</option>

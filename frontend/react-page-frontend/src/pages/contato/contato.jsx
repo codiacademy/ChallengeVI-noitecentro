@@ -89,9 +89,6 @@ export function Contato() {
             <ToastContainer />
         </div>
     );
-<<<<<<< HEAD
-}
-=======
 }
  
->>>>>>> erro-no-registrar
+

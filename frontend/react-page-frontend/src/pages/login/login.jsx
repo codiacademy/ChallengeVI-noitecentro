@@ -2,13 +2,28 @@ import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import * as yup from 'yup';
 import 'react-toastify/dist/ReactToastify.css';
 import './login.css';
 import Axios from 'axios';
 
 export function Login() {
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
+    Axios.defaults.withCredentials = true;
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+
+        if (showPassword) {
+            document.getElementById('password').setAttribute('type', 'password');
+        } else {
+            document.getElementById('password').setAttribute('type', 'text');
+        }
+    };
 
     const validationLogin = yup.object().shape({
         email: yup
@@ -60,8 +75,14 @@ export function Login() {
                             <Field name="email" className="form-field" placeholder="Email" />
                             <ErrorMessage component="span" name="email" className="form-error" />
                         </div>
-                        <div className="login-form-group">
-                            <Field name="password" className="form-field" placeholder="Senha" type="password" />
+                        <div className="login-form-group login-form-group-password">
+                            
+                            <div className="show-password-container">
+                                <Field id="password" name="password" className="form-field" placeholder="Senha" type="password" />
+                                <button className="show-password" onClick={handleClickShowPassword}>
+                                    {showPassword ? <VisibilityOff onClick={handleClickShowPassword} /> : <Visibility onClick={handleClickShowPassword} />}
+                                </button>
+                            </div>
                             <ErrorMessage component="span" name="password" className="form-error" />
                         </div>
 

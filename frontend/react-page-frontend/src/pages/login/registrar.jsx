@@ -2,13 +2,28 @@ import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from 'yup';
 import './login.css';
 import Axios from 'axios';
 
 export function Registrar() {
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+
+        if (showPassword) {
+            document.getElementById('password').setAttribute('type', 'password');
+            document.getElementById('confirmPassword').setAttribute('type', 'password');
+        } else {
+            document.getElementById('password').setAttribute('type', 'text');
+            document.getElementById('confirmPassword').setAttribute('type', 'text');
+        }
+    };
 
     const validationRegister = yup.object().shape({
         email: yup
@@ -26,7 +41,7 @@ export function Registrar() {
     });
 
     const handleClickRegister = (values, { resetForm }) => {
-        Axios.post("http://localhost:3001/register", { 
+        Axios.post("http://localhost:3001/register", {
             email: values.email,
             password: values.password,
         }).then((res) => {
@@ -65,13 +80,27 @@ export function Registrar() {
                             <ErrorMessage component="span" name="email" className="form-error" />
                         </div>
                         <div className="login-form-group">
-                            <Field name="password" className="form-field" placeholder="Senha" type="password" />
+
+                            <div className="show-password-container">
+                                <Field id="password" name="password" className="form-field" placeholder="Senha" type="password" />
+                                <button className="show-password" onClick={handleClickShowPassword}>
+                                    {showPassword ? <VisibilityOff onClick={handleClickShowPassword} /> : <Visibility onClick={handleClickShowPassword} />}
+                                </button>
+                            </div>
+
                             <ErrorMessage component="span" name="password" className="form-error" />
                         </div>
+
                         <div className="login-form-group">
-                            <Field name="confirmPassword" className="form-field" placeholder="Confirme sua senha" type="password" />
+                            <div className="show-password-container">
+                                <Field id="confirmPassword" name="confirmPassword" className="form-field" placeholder="Confirme sua senha" type="password" />
+                                <button className="show-password" onClick={handleClickShowPassword}>
+                                    {showPassword ? <VisibilityOff onClick={handleClickShowPassword} /> : <Visibility onClick={handleClickShowPassword} />}
+                                </button>
+                            </div>
                             <ErrorMessage component="span" name="confirmPassword" className="form-error" />
                         </div>
+
                         <button className="login-button" type="submit">
                             Registrar-se
                         </button>
