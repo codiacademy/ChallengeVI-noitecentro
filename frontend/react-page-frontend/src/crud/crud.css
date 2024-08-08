@@ -1,12 +1,43 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+.app--container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f1f1f1;
+    overflow: scroll;
+    font-family: "Hammersmith One", sans-serif;
+    display: flex;
+    flex-direction: column;
+}
 
+.register--container {
+    width: 100%;
+    max-width: 600px; 
+    margin: auto; 
+    height: auto;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
 
-.register--title{
+.inputs--container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.register--title {
     text-align: center;
     margin-bottom: 20px;
     color: #8B42CA;
@@ -14,25 +45,119 @@
     font-size: 2.5rem;
 }
 
-.register--button{
+.register--input {
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background-color: transparent;
+    border-bottom: 1px solid #1B2153;
+    outline: none;
+    padding: 10px;
+}
+
+.area--input {
+    margin-top: 3%;
+    resize: none;
+    border: 1px solid #1B2153;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: "Hammersmith One", sans-serif;
+    width: 100%;
+    height: 100px;
+}
+
+.register--button {
     height: 35px;
     width: 100px;
     cursor: pointer;
-    background: linear-gradient(90deg, rgba(146,71,196,1) 25%, rgba(0,212,255,1) 88%);
+    background: #1B2153;
     border: none;
     color: #fff;
     border-radius: 5px;
-    background-size: 200% 100%;
-    background-position: left;
-    transition: background-position 1s ease;
+    align-self: center;
 }
 
-.cadastrar:hover {
-    background-position: right;
+.register--select {
+    border: 1px solid #1B2153;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: "Hammersmith One", sans-serif;
+    width: 100%;
+    max-width: 150px;
 }
 
+.card--container {
+    border-top: solid 2px #1B2153;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-.card--svg{
+.title--icon {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.card--svg {
     width: 20px;
     height: 20px;
+    cursor: pointer;
+}
+
+.card--svg:hover {
+    cursor: pointer;
+    color: #0892F9;
+    transition: 0.5s;
+}
+
+.btn--dialog {
+    cursor: pointer;
+    background: #1B2153;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+    .register--title {
+        font-size: 2rem;
+    }
+
+    .register--input,
+    .area--input,
+    .register--select {
+        width: 100%;
+    }
+
+    .inputs--container {
+        flex-direction: column;
+    }
+
+    .register--button {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .register--title {
+        font-size: 1.5rem;
+    }
+
+    .register--input,
+    .area--input,
+    .register--select {
+        width: 100%;
+    }
+
+    .register--button {
+        width: 100%;
+    }
 }

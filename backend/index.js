@@ -122,16 +122,21 @@ app.post("/login", (req, res) => {
 
 // parte de contato ================================================================================================
 app.post("/contactItems", verifyUser, (req, res) => {
+    console.log("Recebendo requisição para /contactItems");
+    console.log("Corpo da requisição:", req.body);
+
     const { nome, email, fone, duvida } = req.body;
     const SQL = "INSERT INTO contact (nome, email, fone, duvida) VALUES (?, ?, ?, ?)";
 
     db.query(SQL, [nome, email, fone, duvida], (err, result) => {
         if (err) {
-            return res.status(500).send(err);
+            console.error("Erro ao cadastrar contato!", err);
+            return res.status(500).send({ msg: "Erro ao cadastrar contato!" });
         }
         res.send({ msg: "Contato cadastrado com sucesso!" });
     });
 });
+
 
 // CRUD de contatos ================================================================================================
 app.post("/contact", verifyUser, (req, res) => {

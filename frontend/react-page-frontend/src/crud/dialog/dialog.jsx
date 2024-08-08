@@ -7,6 +7,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import "../crud.css"
 import Axios from "axios";
 
 export function FormDialog(props) {
@@ -71,9 +72,9 @@ export function FormDialog(props) {
                     <TextField onChange={handleChangeValues} autoFocus margin="dense" id="duvida" label="Dúvida" type="text" value={editValues.duvida} fullWidth />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">Cancelar</Button>
-                    <Button onClick={handleEdit} color="primary">Salvar</Button>
-                    <Button onClick={handleDelete} color="primary">Remover</Button>
+                    <Button className="btn--dialog" onClick={handleClose} color="primary">Cancelar</Button>
+                    <Button className="btn--dialog" onClick={handleEdit} color="primary">Salvar</Button>
+                    <Button className="btn--dialog" onClick={handleDelete} color="primary">Remover</Button>
                 </DialogActions>
             </Dialog>
         </div>
@@ -141,15 +142,15 @@ export function FormDialogLogin(props) {
                 </DialogContent>
 
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                    <Button className="btn--dialog" onClick={handleClose} color="primary">
                         Cancelar
                     </Button>
 
-                    <Button onClick={handleEdit} color="primary">
+                    <Button className="btn--dialog" onClick={handleEdit} color="primary">
                         Salvar
                     </Button>
 
-                    <Button onClick={handleDelete} color="primary">
+                    <Button className="btn--dialog" onClick={handleDelete} color="primary">
                         Remover
                     </Button>
                 </DialogActions>
