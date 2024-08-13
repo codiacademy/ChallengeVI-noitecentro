@@ -1,0 +1,15 @@
+{
+  "name": "challengevi-noitecentro",
+  "version": "1.0.0",
+  "description": "Objetivo: Desenvolver um site que mostre os projetos, prêmios, equipe e facilite a geração de vendas para a empresa de software.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.9"
+  }
+}

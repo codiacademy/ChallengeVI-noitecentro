@@ -4,3 +4,16 @@ h1{
     font-weight: bold;
     
 }
+
+
+body{
+    background: white;
+}
+.sn {
+    width: 100%; /* largura total da div */
+height: 400px; /* altura da div */
+background-image: url('aula4/fundo.jpeg'); 
+background-size: cover; /* ajusta a imagem para cobrir toda a div */
+background-position: center; /* centraliza a imagem na div */
+background-repeat: no-repeat; /* evita repetição da imagem */
+}
