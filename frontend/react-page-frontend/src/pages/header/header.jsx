@@ -21,14 +21,15 @@ export function Header() {
     useEffect(() => {
         Axios.get("http://localhost:3001/header")
             .then(res => {
+                console.log("Resposta do servidor:", res.data);
                 if (res.data.msg === "Autenticação bem-sucedida") {
                     setAuth(true);
-                    setStaff(res.data.user.staff);
+                    setStaff(res.data.user.staff); // Certifique-se de que `staff` é retornado corretamente
                 } else {
                     setAuth(false);
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log("Erro ao buscar header:", err));
     }, []);
 
     const handleLogout = () => {
