@@ -11,6 +11,7 @@ import { ForgotPassword } from "../pages/login/forgot-password.jsx";
 import { ResetPassword } from "../pages/login/reset-password.jsx";
 import { ContatoCrud } from "../crud/contato-crud.jsx";
 import { LoginCrud } from "../crud/login-crud.jsx";
+import { Reuniao } from "../pages/reuniao/reuniao.jsx"
 
 export function Router() {
   return (
@@ -26,6 +27,7 @@ export function Router() {
       <Route path="/reset-password/:userid/:token" element={<ResetPassword />} />
       <Route path="/contato-crud" element={<ContatoCrud />} />
       <Route path="/login-crud" element={<LoginCrud />} />
+      <Route path="/reuniao" element={<Reuniao/>}/>
     </Routes>
   );
 }

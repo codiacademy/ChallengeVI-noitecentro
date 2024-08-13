@@ -24,7 +24,7 @@ export function Header() {
                 console.log("Resposta do servidor:", res.data);
                 if (res.data.msg === "Autenticação bem-sucedida") {
                     setAuth(true);
-                    setStaff(res.data.user.staff); // Certifique-se de que `staff` é retornado corretamente
+                    setStaff(res.data.user.staff); 
                 } else {
                     setAuth(false);
                 }
@@ -55,6 +55,7 @@ export function Header() {
                 <Link className="links" to="/tecnologias">Tecnologias</Link>
                 <Link className="links" to="/servicos">Serviços</Link>
                 <Link className="links" to="/contato">Contato</Link>
+                <Link className="links" to="/reuniao">Agende uma reunião conosco</Link>
                 {auth && staff === 1 && <Link className="links" to="/contato-crud">CRUD Contato</Link>}
                 {auth && staff === 1 && <Link className="links" to="/login-crud">CRUD Login</Link>}
 
@@ -94,6 +95,7 @@ export function Header() {
                 <Link className="sidebar--links" to="/tecnologias" onClick={toggleSidebar}>Tecnologias</Link>
                 <Link className="sidebar--links" to="/servicos" onClick={toggleSidebar}>Serviços</Link>
                 <Link className="sidebar--links" to="/contato" onClick={toggleSidebar}>Contato</Link>
+                <Link className="sidebar--links" to="/reuniao" onClick={toggleSidebar}>Agende uma reunião conosco</Link>
                 {auth && staff === 1 && <Link className="sidebar--links" to="/contato-crud" onClick={toggleSidebar}>CRUD Contato</Link>}
                 {auth && staff === 1 && <Link className="sidebar--links" to="/login-crud" onClick={toggleSidebar}>CRUD Login</Link>}
 
