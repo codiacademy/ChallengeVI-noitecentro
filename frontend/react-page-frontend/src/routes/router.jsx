@@ -7,8 +7,11 @@ import { Servicos } from "../pages/servicos/servicos.jsx";
 import { Contato } from "../pages/contato/contato.jsx";
 import { Login } from "../pages/login/login.jsx";
 import { Registrar } from "../pages/login/registrar.jsx";
+import { ForgotPassword } from "../pages/login/forgot-password.jsx";
+import { ResetPassword } from "../pages/login/reset-password.jsx";
 import { ContatoCrud } from "../crud/contato-crud.jsx";
 import { LoginCrud } from "../crud/login-crud.jsx";
+import { Reuniao } from "../pages/reuniao/reuniao.jsx"
 
 export function Router() {
   return (
@@ -20,8 +23,11 @@ export function Router() {
       <Route path="/contato" element={<Contato />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registrar" element={<Registrar />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password/:userid/:token" element={<ResetPassword />} />
       <Route path="/contato-crud" element={<ContatoCrud />} />
       <Route path="/login-crud" element={<LoginCrud />} />
+      <Route path="/reuniao" element={<Reuniao/>}/>
     </Routes>
   );
 }

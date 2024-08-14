@@ -87,6 +87,7 @@ export function Login() {
                         </div>
 
                         <Link className='link' to="/registrar">Não tem conta? Cadastre-se</Link>
+                        <Link className='link' to="/forgot-password">Esqueceu sua senha?</Link>
 
                         <button className="login-button" type="submit">
                             Login

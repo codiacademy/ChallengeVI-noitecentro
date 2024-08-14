@@ -1,15 +1,135 @@
-.header--links{
-    display: flex;
-    gap: 20px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.logout--button{
+
+.header--container {
+    width: 100vw;
+    height: 13vh;
+    padding: 10px;
+    background-color: #1B2153;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+
+.header--logo {
+    width: 100px;
+    height: 50px;
+    margin-left: 50%;
+}
+
+
+.container--links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 5%;
+}
+
+
+.links {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Hammersmith One', sans-serif;
+}
+
+.links:hover {
+    text-decoration: underline;
+    color: #8B42CA;
+    transition: 0.3s;
+}
+
+
+.logout--button,
+.header--logout {
     background-color: transparent;
     border: none;
+    color: #fff;
 }
 
-.logout{
+.header--logout:hover {
+    color: #8B42CA;
+    transition: 0.3s;
+}
+
+.logout {
     cursor: pointer;
     width: 20px;
     height: 20px;
+}
+
+
+.menu--button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: none; 
+}
+
+.close {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    color: #e61313;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    width: 75%;
+    height: 100%;
+    background-color: #1B2153;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    right: 0; 
+}
+
+.sidebar--links {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.sidebar--links:hover {
+    text-decoration: underline;
+    color: #8B42CA;
+    transition: 0.3s;
+}
+
+.sidebar--logout {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    .container--links {
+        display: none; 
+    }
+
+    .menu--button {
+        display: block; 
+    }
 }
