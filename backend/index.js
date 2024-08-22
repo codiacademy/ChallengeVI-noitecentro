@@ -8,7 +8,6 @@ const { v4: uuidv4 } = require('uuid');
 const cookieParser = require("cookie-parser");
 const nodemailer = require('nodemailer');
 const saltRounds = 10;
-require("dotenv").config();
 
 const db = mysql.createPool({
     host: "localhost",
@@ -29,8 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 
 const generateResetToken = (email, id) => {
     const payload = { email, id };
-    const options = { expiresIn: "15m" };
-    const secret = process.env.JWT_SECRET || "jwt-secret-key";
+    const options = { expiresIn: "1d" };
+    const secret = "jwt-secret-key";
     return jwt.sign(payload, secret, options);
 };
 
@@ -45,7 +44,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const verifyUser = (req, res, next) => {
-    const token = req.cookies.token; // Verifica se o token está sendo recebido dos cookies
+    const token = req.cookies.token; 
     console.log("Token recebido:", token);
     if (!token) {
         return res.status(401).send({ msg: "Autenticação inválida" });
@@ -119,7 +118,7 @@ app.post("/login", (req, res) => {
                 }
                 if (match) {
                     const id = result[0].id;
-                    const accessToken = jwt.sign({ id }, process.env.JWT_SECRET || "jwt-secret-key", { expiresIn: "1h" });
+                    const accessToken = jwt.sign({ id }, "jwt-secret-key", { expiresIn: "1d" });
                     
                     res.cookie('token', accessToken);
                     res.send({msg: "Login efetuado com sucesso" , accessToken }); 
@@ -174,7 +173,7 @@ app.post("/forgot-password", (req, res) => {
 app.get("/reset-password/:userid/:token", (req, res) => {
     const { userid, token } = req.params;
 
-    const secret = process.env.JWT_SECRET || "jwt-secret-key";
+    const secret = "jwt-secret-key";
     try {
         const payload = jwt.verify(token, secret);
         if (payload.id !== parseInt(userid, 10)) {
@@ -196,7 +195,7 @@ app.post("/reset-password/:userid/:token", (req, res) => {
 
     console.log("Token recebido:", token);
     console.log("ID do usuário:", userid);
-    const secret = process.env.JWT_SECRET || "jwt-secret-key";
+    const secret = "jwt-secret-key";
     try {
         const payload = jwt.verify(token, secret);
         if (payload.id !== parseInt(userid, 10)) {
@@ -254,6 +253,92 @@ app.post("/contactItems", verifyUser, (req, res) => {
     });
 });
 
+
+// Parte de reunião ================================================================================================
+app.post("/reuniao", verifyUser, (req, res) => {
+    const { data, horario, telefone, ideias, designlink, nome, email } = req.body;
+
+    console.log("Dados recebidos:", req.body);
+
+    // Verifique se todos os campos obrigatórios estão presentes
+    if (!data || !horario || !telefone || !nome || !email) {
+        return res.status(400).send({ msg: "Os campos obrigatórios são: data, horário, telefone, nome e email!" });
+    }
+
+    // Prepare a consulta SQL com valores opcionais
+    const SQL = "INSERT INTO reuniao (data, horario, telefone, ideias, designlink, nome, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    db.query(SQL, [
+        data,
+        horario,
+        telefone,
+        ideias || null,          // Permite null se não fornecido
+        designlink || null,      // Permite null se não fornecido
+        nome,
+        email
+    ], (err, result) => {
+        if (err) {
+            console.error("Erro ao agendar reunião:", err);
+            return res.status(500).send({ msg: "Erro ao agendar reunião!" });
+        }
+        res.status(200).send({ msg: "Reunião agendada com sucesso!" });
+    });
+});
+
+
+
+// Crud de reuniões ================================================================================================
+app.post("/reuniaocrud", verifyUser, (req, res) => {
+    const { data, horario, telefone, ideias, designlink, nome, email } = req.body;
+    const SQL = "INSERT INTO reuniao (data, horario, telefone, ideias, designlink, nome, email) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+  
+    db.query(SQL, [data, horario, telefone, ideias, designlink, nome, email], (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Erro ao inserir os dados");
+        } else {
+            res.status(200).send("Dados inseridos com sucesso");
+        }
+    });
+});
+
+app.get("/reuniaocrud", verifyUser, (req, res) => {
+    const SQL = "SELECT * FROM reuniao";
+    db.query(SQL, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Erro ao buscar os dados");
+        } 
+         res.send(result);
+    });
+});
+
+app.put("/reuniaocrud", verifyUser, (req, res) => {
+    const { id, data, horario, telefone, ideias, designlink, nome, email } = req.body;
+    const SQL = "UPDATE reuniao SET data = ?, horario = ?, telefone = ?, ideias = ?, designlink = ?, nome = ?, email = ? WHERE id = ?";
+  
+    db.query(SQL, [data, horario, telefone, ideias, designlink, nome, email, id], (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Erro ao atualizar os dados");
+        } else {
+            res.status(200).send("Dados atualizados com sucesso");
+        }
+    });
+});
+
+app.delete("/reuniaocrud/:id", verifyUser, (req, res) => {
+    const { id } = req.params;
+    const SQL = "DELETE FROM reuniao WHERE id = ?";
+  
+    db.query(SQL, [id], (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Erro ao deletar os dados");
+        } else {
+            res.status(200).send("Dados deletados com sucesso");
+        }
+    });
+});
 
 // CRUD de contatos ================================================================================================
 app.post("/contact", verifyUser, (req, res) => {
@@ -403,7 +488,6 @@ app.delete("/users/:id", verifyUser, (req, res) => {
         res.send({ msg: "Usuário excluído com sucesso!" });
     });
 });
-
 
 // configurando a porta do servidor ====================================================================================
 app.listen(3001, () => {

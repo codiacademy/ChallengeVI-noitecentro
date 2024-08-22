@@ -158,3 +158,79 @@ export function FormDialogLogin(props) {
         </div>
     );
 }
+
+export function FormDialogReuniao(props) {
+    const [editValues, setEditValues] = useState({
+        id: props.id,
+        data: props.data,
+        horario: props.horario,
+        telefone: props.telefone,
+        ideias: props.ideias,
+        designlink: props.designlink,
+        nome: props.nome,
+        email: props.email
+    });
+
+    const handleEdit = () => {
+        Axios.put("http://localhost:3001/reuniaoCrud", {
+            id: editValues.id,
+            data: editValues.data,
+            horario: editValues.horario,
+            telefone: editValues.telefone,
+            ideias: editValues.ideias,
+            designlink: editValues.designlink,
+            nome: editValues.nome,
+            email: editValues.email
+        }).then((response) => {
+            console.log(response);
+            Axios.get("http://localhost:3001/reuniaoCrud").then((response) => {
+                props.setListReuniao(response.data);
+            });
+        });
+        handleClose();
+    };
+
+    const handleDelete = () => {
+        Axios.delete(`http://localhost:3001/reuniaoCrud/${editValues.id}`).then((response) => {
+            console.log(response);
+            Axios.get("http://localhost:3001/reuniaoCrud").then((response) => {
+                props.setListReuniao(response.data);
+            });
+        });
+        handleClose();
+    };
+
+    const handleClose = () => {
+        props.setOpen(false);
+    };
+
+    const handleChangeValues = (value) => {
+        setEditValues((prevValues) => ({
+            ...prevValues,
+            [value.target.name]: value.target.value
+        }));
+    };
+
+    return (
+        <div>
+            <Dialog open={props.open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Editar</DialogTitle>
+                <DialogContent>
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="id" name="id" label="id" type="text" disabled fullWidth value={editValues.id} />
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="data" name="data" label="Data" type="date" fullWidth value={editValues.data} />
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="horario" name="horario" label="Horario" type="time" fullWidth value={editValues.horario} />
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="telefone" name="telefone" label="Telefone" type="text" fullWidth value={editValues.telefone} />
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="ideias" name="ideias" label="Ideias" type="text" fullWidth value={editValues.ideias} />
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="designlink" name="designlink" label="Design Link" type="text" fullWidth value={editValues.designlink} />
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="nome" name="nome" label="Nome" type="text" fullWidth value={editValues.nome} />
+                    <TextField onChange={handleChangeValues} autoFocus margin="dense" id="email" name="email" label="Email" type="email" fullWidth value={editValues.email} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">Cancelar</Button>
+                    <Button onClick={handleDelete} color="primary">Excluir</Button>
+                    <Button onClick={handleEdit} color="primary">Salvar</Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
+}

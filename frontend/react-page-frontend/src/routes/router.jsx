@@ -12,6 +12,7 @@ import { ResetPassword } from "../pages/login/reset-password.jsx";
 import { ContatoCrud } from "../crud/contato-crud.jsx";
 import { LoginCrud } from "../crud/login-crud.jsx";
 import { Reuniao } from "../pages/reuniao/reuniao.jsx"
+import { ReuniaoCrud } from "../crud/reuniao-crud.jsx"
 
 export function Router() {
   return (
@@ -28,6 +29,7 @@ export function Router() {
       <Route path="/contato-crud" element={<ContatoCrud />} />
       <Route path="/login-crud" element={<LoginCrud />} />
       <Route path="/reuniao" element={<Reuniao/>}/>
+      <Route path="/reuniao-crud" element={<ReuniaoCrud/>}/>
     </Routes>
   );
 }

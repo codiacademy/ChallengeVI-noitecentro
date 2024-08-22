@@ -2,16 +2,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 .app--container {
     width: 100vw;
     height: 100vh;
     background-color: #f1f1f1;
-    overflow: scroll;
+    overflow-x: hidden;
     font-family: "Hammersmith One", sans-serif;
+
     display: flex;
     flex-direction: column;
+
 }
 
 .register--container {
@@ -22,7 +25,25 @@
     background-color: #fff;
     border-radius: 50px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 2%;    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.register--container-right{
+    width: 100%;
+    max-width: 600px; 
+    margin: auto; 
+    height: auto;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     padding: 2%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,6 +114,8 @@
     margin-left: auto;
     margin-right: auto;
     width: 90%;
+    color: #000;
+
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -108,6 +131,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+    color: #1B2153;
 }
 
 .card--svg:hover {

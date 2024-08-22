@@ -91,8 +91,6 @@ export function CardLogin(props) {
                 <p className="card--email">Email: {props.email}</p>
                 <p className="card--telefone">Senha: {props.password}</p>
                 <p className="card--cargo">Cargo: {props.staff === 0 ? "Usuário comum" : "Administrador"}</p>
-
-
             </div>
         </>
     )

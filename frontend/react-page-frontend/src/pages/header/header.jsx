@@ -58,6 +58,7 @@ export function Header() {
                 <Link className="links" to="/reuniao">Agende uma reunião conosco</Link>
                 {auth && staff === 1 && <Link className="links" to="/contato-crud">CRUD Contato</Link>}
                 {auth && staff === 1 && <Link className="links" to="/login-crud">CRUD Login</Link>}
+                {auth && staff === 1 && <Link className="links" to="reuniao-crud">CRUD Reuniao</Link>}    
 
                 {auth ? (
                     <button className="header--logout" onClick={handleLogout}>
@@ -68,11 +69,11 @@ export function Header() {
                 ) : (
                     <>
                         <Tooltip title="Login">
-                            <Link className="links" to="/login"><AccountCircle /></Link>
+                            <Link className="links" to="/login"><AccountCircle />Entrar</Link>
                         </Tooltip>
 
                         <Tooltip title="Registrar-se">
-                            <Link className="links" to="/registrar"><PersonAdd /></Link>
+                            <Link className="links" to="/registrar"><PersonAdd />Registrar-se</Link>
                         </Tooltip>
                     </>
                 )}
@@ -98,6 +99,7 @@ export function Header() {
                 <Link className="sidebar--links" to="/reuniao" onClick={toggleSidebar}>Agende uma reunião conosco</Link>
                 {auth && staff === 1 && <Link className="sidebar--links" to="/contato-crud" onClick={toggleSidebar}>CRUD Contato</Link>}
                 {auth && staff === 1 && <Link className="sidebar--links" to="/login-crud" onClick={toggleSidebar}>CRUD Login</Link>}
+                {auth && staff === 1 && <Link className="sidebar--links" to="/reuniao-crud" onClick={toggleSidebar}>CRUD Reuniao</Link>}
 
                 {auth ? (
                     <button className="sidebar--logout" onClick={() => { handleLogout(); toggleSidebar(); }}>
@@ -108,11 +110,11 @@ export function Header() {
                 ) : (
                     <>
                         <Tooltip title="Login">
-                            <Link className="sidebar--links" to="/login" onClick={toggleSidebar}><AccountCircle /></Link>
+                            <Link className="sidebar--links" to="/login" onClick={toggleSidebar}><AccountCircle />Entrar</Link>
                         </Tooltip>
 
                         <Tooltip title="Registrar-se">
-                            <Link className="sidebar--links" to="/registrar" onClick={toggleSidebar}><PersonAdd /></Link>
+                            <Link className="sidebar--links" to="/registrar" onClick={toggleSidebar}><PersonAdd />Registrar-se</Link>
                         </Tooltip>
                     </>
                 )}

@@ -1,70 +1,106 @@
-.global--container{
+/* Container global */
+.global--container {
     font-family: Arial, Helvetica, sans-serif;
     width: 100vw;
     height: 100vh;
     background-image: url('../../assets/images/background-contato.jpg');
     background-size: cover;
     background-position: center;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
-.container--contact{
+/* Container do formulário de contato */
+.container--contact {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: rgba(27, 33, 83, 0.8); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
 }
 
-.title-contact{
-    position: absolute;
-    top: 7%;
+/* Título do formulário */
+.title-contact {
     color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.form-contact{
-    margin-top: 10%;
-
+/* Formulário de contato */
+.form-contact {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    width: 100%;
 }
 
-.form-contact-input{
+/* Estilo dos inputs do formulário */
+.form-contact-input {
     border: solid 2px #fff;
     border-radius: 7px;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
 }
 
-.form-contact-input::placeholder{
-    padding-left: 5px;
+/* Placeholder dos inputs */
+.form-contact-input::placeholder {
+    color: #999;
+    font-size: 0.9rem;
 }
 
-.form-contact-textarea{
+/* Estilo do textarea */
+.form-contact-textarea {
     border: solid 2px #fff;
-    border-radius: 5px;
+    border-radius: 7px;
+    padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
     resize: none;
-
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    font-size: 1rem;
+    height: 100px;
 }
 
-.form-contact-textarea::placeholder{
-    padding-left: 5px;
-    padding-top: 5px;
+/* Placeholder do textarea */
+.form-contact-textarea::placeholder {
+    color: #999;
+    font-size: 0.9rem;
 }
 
+/* Botão de enviar */
 .btn-contact {
-    height: 35px;
+    height: 40px;
     width: 100%;
     cursor: pointer;
-    background-color: #1B2153;
+    background-color: #8B42CA;
     border: none;
     color: #fff;
     border-radius: 5px;
-    background-size: 200% 100%;
+    font-size: 1.1rem;
 }
 
-.btn-contact:hover {
-    background-position: right;
+/* Responsividade */
+@media (max-width: 768px) {
+    .container--contact {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .form-contact-input, .form-contact-textarea {
+        font-size: 0.9rem;
+    }
+
+    .title-contact {
+        font-size: 1.5rem;
+    }
 }

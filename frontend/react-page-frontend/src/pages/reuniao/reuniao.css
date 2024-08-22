@@ -1,0 +1,159 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
+    color: #fff;
+}
+
+/* Container principal */
+.reuniao {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.reuniao h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #1B2153;
+}
+
+/* Layout flexível */
+.container-reuniao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Estilização das seções */
+.left-side,
+.right-side {
+    flex: 1 1 300px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Estilização dos inputs */
+.input,
+.input,
+.input,
+.input,
+.input,
+.input,
+.textarea {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    background-color: #1B2153;
+    border-radius: 5px;
+    border: solid 2px #fff;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+/* Estilização das labels */
+.label {
+    font-size: 0.9rem;
+    color: #1B2153;
+    text-align: left;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Estilização da seção de checkboxes */
+.checkbox--items h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #1B2153;
+}
+
+.checkbox--board {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.checkbox--board-crud {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.checkbox--group {
+    background-color: #1B2153;
+    border: 2px solid transparent;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.3s;
+}
+
+.checkbox--group:hover {
+    border-color: #fff;
+}
+
+.checkbox--group label {
+    font-size: 0.9rem;
+}
+
+.checkbox--group input {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.btn--reuniao {
+    background-color: #8B42CA;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 50%;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.btn--reuniao:hover {
+    background-color: #fff;
+    color: #8B42CA;
+    border: 1px solid #8B42CA;
+    transition: 0.4s linear;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-reuniao {
+        flex-direction: column;
+    }
+
+    .checkbox--board {
+        grid-template-columns: 1fr;
+    }
+}

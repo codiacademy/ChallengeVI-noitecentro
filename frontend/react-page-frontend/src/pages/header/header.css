@@ -38,6 +38,11 @@
     color: #fff;
     cursor: pointer;
     font-family: 'Hammersmith One', sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .links:hover {
@@ -109,6 +114,11 @@
     font-family: 'Hammersmith One', sans-serif;
     font-size: 1.5rem;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .sidebar--links:hover {
