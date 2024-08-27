@@ -1,0 +1,109 @@
+.techs-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.techs-content {
+    margin-top: 10%;
+}
+
+.techs-title {
+    font-size: 2.2rem;
+    text-align: center;
+    color: #1B2153;
+}
+
+/* Grid para telas grandes (1024px ou mais) */
+.techs-icons {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 colunas horizontais */
+    gap: 10px;
+    justify-items: center;
+    margin-top: 2%;
+}
+
+/* Estilos dos ícones */
+.icon {
+    width: 100px;
+    height: 100px;
+}
+
+/* Container de texto */
+.container-text-techs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.techs-text {
+    text-align: center;
+    color: #000;
+    font-size: 1.5rem;
+    margin-top: 2%;
+}
+
+/* Para telas menores que 1024px, organizar em duas colunas */
+@media (max-width: 1024px) {
+    .techs-icons {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas verticais */
+        gap: 20px;
+    }
+
+    .techs-content {
+        margin-top: 25%;
+    }
+
+    .techs-title {
+        font-size: 2rem;
+    }
+
+    .icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .techs-text {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .techs-content {
+        margin-top: 20%;
+    }
+
+    .techs-title {
+        font-size: 1.8rem;
+    }
+
+    .icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .techs-text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .techs-content {
+        margin-top: 30%;
+    }
+
+    .techs-title {
+        font-size: 1.6rem;
+    }
+
+    .icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .techs-text {
+        font-size: 1rem;
+    }
+}

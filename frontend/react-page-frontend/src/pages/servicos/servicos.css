@@ -1,0 +1,170 @@
+.services-body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f1f1f1;
+    overflow-x: hidden;
+    font-family: "Hammersmith One", sans-serif;
+}
+
+.services-content {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.services-title {
+    font-size: 2.2rem;
+    text-align: center;
+    color: #1B2153;
+}
+
+/* Estilos gerais para seções */
+.web, .mobile, .desktop {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 4%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.web-text, .mobile-text, .desktop-text {
+    margin-top: 2%;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    line-height: 1.3rem;
+    gap: 1rem;
+}
+
+.web-title, .mobile-title, .desktop-title {
+    font-size: 1.5rem;
+    align-items: start;
+}
+
+.web-img img, .mobile-img img, .desktop-img img {
+    width: 300px;
+    height: 275px;
+}
+
+.feitos {
+    border-top: solid 2px #1B2153;
+    width: 90%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.feitos-text {
+    text-align: center;
+    color: #000;
+    margin-top: 5%;
+    font-size: 1.5rem;
+}
+
+.feitos-img {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.feitos-img img {
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 1024px) {
+    .services-content {
+        margin-top: 25%;
+    }
+
+    .services-title {
+        font-size: 2rem;
+    }
+
+    .web, .mobile, .desktop {
+        flex-direction: column;
+    }
+
+    .web-img img, .mobile-img img, .desktop-img img {
+        width: 250px;
+        height: 220px;
+    }
+
+    .feitos-img img {
+        width: 400px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-content {
+        margin-top: 20%;
+    }
+
+    .services-title {
+        font-size: 1.8rem;
+    }
+
+    .web-text, .mobile-text, .desktop-text {
+        font-size: 1rem;
+        line-height: 1.2rem;
+    }
+
+    .web-img img, .mobile-img img, .desktop-img img {
+        width: 220px;
+        height: 200px;
+    }
+
+    .feitos-img{
+        flex-direction: column;
+    }
+
+    .feitos-img img {
+        width: 350px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-content {
+        margin-top: 30%;
+    }
+
+    .services-title {
+        font-size: 1.6rem;
+    }
+
+    .web-img img, .mobile-img img, .desktop-img img {
+        width: 200px;
+        height: 180px;
+    }
+
+    .feitos-img{
+        flex-direction: column;
+    }
+
+    .feitos-img img {
+        width: 300px;
+        height: 140px;
+    }
+
+    .feitos-text {
+        font-size: 1.2rem;
+    }
+}

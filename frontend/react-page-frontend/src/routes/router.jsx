@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 import { Home } from "../pages/home/home.jsx";
 import { Sobre } from "../pages/sobre/sobre.jsx";
@@ -15,6 +16,55 @@ import { Reuniao } from "../pages/reuniao/reuniao.jsx"
 import { ReuniaoCrud } from "../crud/reuniao-crud.jsx"
 
 export function Router() {
+  const location = useLocation();
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/':
+        document.title = 'Home | Magic';
+        break;
+      case '/sobre':
+        document.title = 'Sobre | Magic';
+        break;
+      case '/tecnologias':
+        document.title = 'Tecnologias | Magic';
+        break;
+      case '/servicos':
+        document.title = 'Serviços | Magic';
+        break;
+      case '/contato':
+        document.title = 'Contato | Magic';
+        break;
+      case '/login':
+        document.title = 'Login | Magic';
+        break;
+      case '/registrar':
+        document.title = 'Registrar | Magic';
+        break;
+      case '/forgot-password':
+        document.title = 'Recuperar Senha | Magic';
+        break;
+      case `/reset-password/${location.pathname.split("/")[2]}`:
+        document.title = 'Redefinir Senha | Magic';
+        break;
+      case '/contato-crud':
+        document.title = 'Contato CRUD | Magic';
+        break;
+      case '/login-crud':
+        document.title = 'Login CRUD | Magic';
+        break;
+      case '/reuniao':
+        document.title = 'Reunião | Magic';
+        break;
+      case '/reuniao-crud':
+        document.title = 'Reunião CRUD | Magic';
+        break;
+      default:
+        document.title = 'Magic';
+        break;
+    }
+  }, [location]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

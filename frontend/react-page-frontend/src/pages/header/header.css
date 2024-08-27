@@ -11,10 +11,13 @@
     height: 13vh;
     padding: 10px;
     background-color: #1B2153;
+    top: 0;
+    z-index: 1000;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    position: fixed;
 }
 
 
@@ -135,6 +138,10 @@
 
 
 @media (max-width: 768px) {
+    .sidebar--links {
+        text-align: center;
+    }
+
     .container--links {
         display: none; 
     }
