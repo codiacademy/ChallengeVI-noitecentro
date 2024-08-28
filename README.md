@@ -43,6 +43,12 @@ Objetivo: Desenvolver um site que mostre os projetos, prêmios, equipe e facilit
   cd backend
 ```
 
+**Dentro do backend e do react-page-frontend**
+```bash
+  npm install
+```
+
+
 **Para rodar localmente no backend:**
 ```bash
   npm run dev
